@@ -17,7 +17,7 @@ To run the tool use Following commands :
 
 2)Organize - To Organize all the files present in the folder according to there extension
 
-        node main.js <dirPath>
+        node main.js organize <dirPath>
 3)Help - To view all the commands you can use
 
     node main.js help
