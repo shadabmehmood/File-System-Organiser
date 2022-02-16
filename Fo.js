@@ -1,12 +1,12 @@
 const fs = require("fs");
 const path = require("path");
 let input = process.argv.slice(2); //array for command line input
-console.log(input);
+//console.log(input);
 
 let command = input[0];
 
 let types = {
-  media: ["mp4", "mkv", "mp3"],
+  media: ["mp4", "mkv", "mp3", "mp4", "jpg"],
   archives: ["zip", "7z", "rar", "tar", "gz", "ar", "iso", "xz"],
   documents: [
     "docx",
@@ -77,7 +77,7 @@ function organiseFn(dirPath) {
   }
 }
 
-function organizeHelper(src, des) {
+function organizeHelper(src, dest) {
   let childNames = fs.readdirSync(src);
 
   for (let i = 0; i < childNames.length; i++) {
@@ -86,9 +86,14 @@ function organizeHelper(src, des) {
 
     if (isFile == true) {
       let fileCategory = getCategory(childNames[i]);
-      console.log(childNames[i] + " belongs to " + fileCategory);
+      //console.log(childNames[i] + " belongs to " + fileCategory);
+      sendFiles(childAdresse,dest, fileCategory)
     }
+
+    
   }
+
+  
 }
 function getCategory(FileName) {
   let ext = path.extname(FileName).slice(1);
@@ -106,3 +111,27 @@ function getCategory(FileName) {
   }
   return "others";
 }
+
+
+function sendFiles(srcFilePath, dest ,fileCategory){
+
+    let catPath = path.join(dest, fileCategory);
+
+    if (fs.existsSync(catPath) == false) {
+        fs.mkdirSync(catPath);
+      }
+
+      let fileName = path.basename(srcFilePath);
+
+  // took out the basename of all the files
+
+  let destFilePath = path.join(catPath, fileName);
+
+  fs.copyFileSync(srcFilePath, destFilePath);
+
+  fs.unlinkSync(srcFilePath);
+
+  console.log("Files Organized");
+}
+
+
