@@ -8,4 +8,4 @@ If we have numerous Files in a folder and they are not Properly arranged then yo
        .exe files will go into application folder and so on , 
  
  
-  so at the end we will have a arranged set of files in specific folders .
+  so at the end we will have a arranged set of files in specific folders which will make searching files in any folder easier
